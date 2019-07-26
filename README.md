@@ -11,7 +11,7 @@ An FW/1 subsystem for loading external configurations into an application access
 	variables.framework = {
 	  // ... other framework settings
 	  dotenv: {
-	    fileName: "/conf/.env"
+	    fileName: "/path/to/settings/file/.env"
 	  }
 	  subsystems: {
 	    fw1dotenv: {
