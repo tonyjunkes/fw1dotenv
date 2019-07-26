@@ -1,7 +1,7 @@
 {
     "name":"fw1dotenv-test",
     "app":{
-        "cfengine":"adobe@2018"
+        "cfengine":"lucee@5"
     },
     "web":{
         "http":{
