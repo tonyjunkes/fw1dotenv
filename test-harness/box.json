@@ -7,8 +7,8 @@
         "fw1":"^4.2.0"
     },
     "installPaths":{
-        "testbox":"testbox",
-        "fw1":"framework"
+        "testbox":"testbox/",
+        "fw1":"framework/"
     },
     "testbox":{
         "runner":"http://localhost:8520/tests/runner.cfm"

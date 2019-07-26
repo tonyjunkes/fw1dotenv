@@ -1,10 +1,11 @@
 component {
     this.name = "FW1DotenvTestingSuite" & hash(getCurrentTemplatePath());
+    variables.testsPath = getDirectoryFromPath( getCurrentTemplatePath() );
     this.mappings = {
-        "/tests": getDirectoryFromPath( getCurrentTemplatePath() ),
-        "/resources": "./resources",
-        "/testbox": "../testbox",
-        "/framework": "../framework",
-        "/model": "../../model"
+        "/tests": variables.testsPath,
+        "/resources": variables.testsPath & "./resources",
+        "/testbox": variables.testsPath & "../testbox",
+        "/framework": variables.testsPath & "../framework",
+        "/model": variables.testsPath & "../../model"
     };
 }
