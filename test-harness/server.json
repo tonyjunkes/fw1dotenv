@@ -1,0 +1,12 @@
+{
+    "name":"fw1dotenv-test",
+    "app":{
+        "cfengine":"lucee@5"
+    },
+    "web":{
+        "http":{
+            "port":"8520"
+        }
+    },
+    "openbrowser":"false"
+}

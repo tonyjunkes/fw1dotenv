@@ -1,0 +1,16 @@
+{
+    "name":"FW/1 Dotenv Test",
+    "slug":"fw1dotenv-test",
+    "version":"0.0.0",
+    "devDependencies":{
+        "testbox":"^3.0.0",
+        "fw1":"^4.2.0"
+    },
+    "installPaths":{
+        "testbox":"testbox",
+        "fw1":"framework"
+    },
+    "testbox":{
+        "runner":"http://localhost:8520/tests/runner.cfm"
+    }
+}
