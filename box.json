@@ -38,8 +38,8 @@
     ],
     "license":[
         {
-            "type":"Apache 2.0",
-            "url":"http://www.apache.org/licenses/LICENSE-2.0"
+            "type":"MIT",
+            "url":"https://github.com/tonyjunkes/fw1dotenv/blob/master/LICENSE"
         }
     ],
     "contributors":[
