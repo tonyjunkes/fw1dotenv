@@ -1,5 +1,5 @@
 
-# FW/1 Dotenv
+# FW/1 Dotenv [![Build Status](https://travis-ci.org/tonyjunkes/fw1dotenv.svg?branch=master)](https://travis-ci.org/tonyjunkes/fw1dotenv)
 
 An FW/1 subsystem for loading external configurations into an application accessible bean object.
 
