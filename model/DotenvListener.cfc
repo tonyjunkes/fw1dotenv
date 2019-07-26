@@ -1,14 +1,18 @@
 component
+    accessors=true
     output=false
 {
+    property fw;
+
     public function onLoad( di1 ) {
         // Get configuration file from framework subsystem settings
-        var envFilePath = expandPath( di1.getBean( "fw" ).getConfig()?.dotenv?.fileName );
+        var envFilePath = expandPath( variables.fw.getConfig()?.dotenv?.fileName );
         if ( fileExists( envFilePath ) ) {
             var envFile = fileRead( envFilePath );
             // If JSON, deserialize natively and include as bean
             if ( isJSON( envFile ) ) {
-                di1.declare( "SystemSettings" ).asValue( deserializeJSON( envFile ) );
+                // Load the bean into the parent bean factory
+                variables.fw.getBeanFactory().declare( "SystemSettings" ).asValue( deserializeJSON( envFile ) );
             } else {
                 // Otherwise load as properties format and include as bean
                 var FileInputStream = createObject( "java", "java.io.FileInputStream" );
@@ -19,7 +23,8 @@ component
                 Properties.each(function( prop ) {
                     envVars[ arguments.prop ] = Properties[ arguments.prop ];
                 });
-                di1.declare( "SystemSettings" ).asValue( envVars );
+                // Load the bean into the parent bean factory
+                variables.fw.getBeanFactory().declare( "SystemSettings" ).asValue( envVars );
             }
         } else {
             // Print to console if no file can be found
