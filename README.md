@@ -7,7 +7,7 @@ An FW/1 subsystem for loading external configurations into an application access
 
 1. Include `fw1dotenv` in your FW/1 application's designated `subsystems` directory. If you do not already have a `subsystems` directory, create the directory wherever the rest of your core framework structure lives. You may refer to the [FW/1 Documentation](http://framework-one.github.io/documentation/developing-applications.html#basic-application-structure) for a rundown of a typical structure.
 1. Configure your FW/1 settings to include the location of your settings file and the subsystem's load listener for integrating the settings as a bean.
-    ```
+    ```coldfusion
 	variables.framework = {
 	  // ... other framework settings
 	  dotenv: {
