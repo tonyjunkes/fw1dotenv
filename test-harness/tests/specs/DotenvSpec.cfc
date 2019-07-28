@@ -69,14 +69,33 @@ component extends="testbox.system.BaseSpec" {
                 });
                 variables.fw.onApplicationStart();
 
-                var bean = variables.fw.getBeanFactory().containsBean( "SystemSettings" );
-                expect( bean ).toBeTrue();
+                var beanExists = variables.fw.getBeanFactory().containsBean( "SystemSettings" );
+                expect( beanExists ).toBeTrue();
 
                 var beanType = variables.fw.getBeanFactory().getBean( "SystemSettings" );
                 expect( beanType ).toBeTypeOf( "struct" );
 
                 var beanVal = variables.fw.getBeanFactory().getBean( "SystemSettings" ).testkey;
                 expect( beanVal ).toBe( "test_json_value" );
+            });
+
+            it( "Tests SystemSettings bean is created and aliased with a custom name", function() {
+                variables.fw.__config().append({
+                    dotenv: {
+                        beanAlias: "CustomNameSettings",
+                        fileName: "/resources/.env"
+                    }
+                });
+                variables.fw.onApplicationStart();
+
+                var beanExists = variables.fw.getBeanFactory().containsBean( "CustomNameSettings" );
+                expect( beanExists ).toBeTrue();
+
+                var beanType = variables.fw.getBeanFactory().getBean( "CustomNameSettings" );
+                expect( beanType ).toBeTypeOf( "struct" );
+
+                var beanVal = variables.fw.getBeanFactory().getBean( "CustomNameSettings" ).testkey;
+                expect( beanVal ).toBe( "test_env_value" );
             });
         });
     }

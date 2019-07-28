@@ -6,7 +6,8 @@ component
 
     public function onLoad( di1 ) {
         // Get configuration file from framework subsystem settings
-        var envFilePath = expandPath( variables.fw.getConfig()?.dotenv?.fileName );
+        var fw1Config = variables.fw.getConfig();
+        var envFilePath = expandPath( fw1Config?.dotenv?.fileName );
         if ( fileExists( envFilePath ) ) {
             var envFile = fileRead( envFilePath );
             // If JSON, deserialize natively and include as bean
@@ -25,6 +26,10 @@ component
                 });
                 // Load the bean into the parent bean factory
                 variables.fw.getBeanFactory().declare( "SystemSettings" ).asValue( envVars );
+            }
+            // Setup alias if config exists in framework settings
+            if ( len( fw1Config?.dotenv?.beanAlias ) ) {
+                variables.fw.getBeanFactory().declare( fw1Config.dotenv.beanAlias ).aliasFor( "SystemSettings" );
             }
         } else {
             // Print to console if no file can be found
