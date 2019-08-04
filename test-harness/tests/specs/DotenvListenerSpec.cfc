@@ -1,27 +1,39 @@
 component extends="testbox.system.BaseSpec" {
 
+    function __config() {
+        return variables.framework;
+    }
+
     function run() {
-        describe( "Tests FW/1 Dotenv", function() {
+        describe( "FW/1 Dotenv load listener", function() {
             beforeEach(function( currentSpec ) {
                 // Reset the framework instance before each spec is run
                 request.delete( "_fw1" );
                 variables.fw = new framework.one();
                 variables.fw.__config = __config;
                 variables.fw.__config().append({
-                    diLocations: "/model",
-                    diConfig: {
-                        omitDirectoryAliases: true,
-                        loadListener: "DotenvListener"
+                    subsystems: {
+                        fw1dotenv: {
+                            diLocations: "/model",
+                            diConfig: {
+                                omitDirectoryAliases: true,
+                                loadListener: "DotenvListener"
+                            }
+                        }
                     }
                 });
             });
 
-            it( "Tests load listener is discovered", function() {
+            it( "Tests exception when file not found", function() {
+                variables.fw.__config().append({
+                    dotenv: {
+                        fileName: "/resources/.notafile.env"
+                    }
+                });
                 variables.fw.onApplicationStart();
 
-                // Load listener is loaded
-                var moduleExists = variables.fw.getBeanFactory().containsBean( "DotenvListener" );
-                expect( moduleExists ).toBeTrue();
+                expect( function() { variables.fw.getBeanFactory().getBean( "SystemSettings" ); } )
+                        .toThrow( message = "[fw1dotenv]: Could not find environment file." );
             });
 
             it( "Tests SystemSettings bean is created from a .env properties file", function() {
@@ -32,14 +44,13 @@ component extends="testbox.system.BaseSpec" {
                 });
                 variables.fw.onApplicationStart();
 
-                // Bean is created
-                var beanExists = variables.fw.getBeanFactory().containsBean( "SystemSettings" );
+                var beanExists = variables.fw.getBeanFactory( "fw1dotenv" ).containsBean( "SystemSettings" );
                 expect( beanExists ).toBeTrue();
 
-                var beanType = variables.fw.getBeanFactory().getBean( "SystemSettings" );
+                var beanType = variables.fw.getBeanFactory( "fw1dotenv" ).getBean( "SystemSettings" );
                 expect( beanType ).toBeTypeOf( "struct" );
 
-                var beanVal = variables.fw.getBeanFactory().getBean( "SystemSettings" ).testkey;
+                var beanVal = variables.fw.getBeanFactory( "fw1dotenv" ).getBean( "SystemSettings" ).testkey;
                 expect( beanVal ).toBe( "test_env_value" );
             });
 
@@ -51,13 +62,13 @@ component extends="testbox.system.BaseSpec" {
                 });
                 variables.fw.onApplicationStart();
 
-                var beanExists = variables.fw.getBeanFactory().containsBean( "SystemSettings" );
+                var beanExists = variables.fw.getBeanFactory( "fw1dotenv" ).containsBean( "SystemSettings" );
                 expect( beanExists ).toBeTrue();
 
-                var beanType = variables.fw.getBeanFactory().getBean( "SystemSettings" );
+                var beanType = variables.fw.getBeanFactory( "fw1dotenv" ).getBean( "SystemSettings" );
                 expect( beanType ).toBeTypeOf( "struct" );
 
-                var beanVal = variables.fw.getBeanFactory().getBean( "SystemSettings" ).testkey;
+                var beanVal = variables.fw.getBeanFactory( "fw1dotenv" ).getBean( "SystemSettings" ).testkey;
                 expect( beanVal ).toBe( "test_properties_value" );
             });
 
@@ -69,13 +80,13 @@ component extends="testbox.system.BaseSpec" {
                 });
                 variables.fw.onApplicationStart();
 
-                var beanExists = variables.fw.getBeanFactory().containsBean( "SystemSettings" );
+                var beanExists = variables.fw.getBeanFactory( "fw1dotenv" ).containsBean( "SystemSettings" );
                 expect( beanExists ).toBeTrue();
 
-                var beanType = variables.fw.getBeanFactory().getBean( "SystemSettings" );
+                var beanType = variables.fw.getBeanFactory( "fw1dotenv" ).getBean( "SystemSettings" );
                 expect( beanType ).toBeTypeOf( "struct" );
 
-                var beanVal = variables.fw.getBeanFactory().getBean( "SystemSettings" ).testkey;
+                var beanVal = variables.fw.getBeanFactory( "fw1dotenv" ).getBean( "SystemSettings" ).testkey;
                 expect( beanVal ).toBe( "test_json_value" );
             });
 
@@ -88,20 +99,16 @@ component extends="testbox.system.BaseSpec" {
                 });
                 variables.fw.onApplicationStart();
 
-                var beanExists = variables.fw.getBeanFactory().containsBean( "CustomNameSettings" );
+                var beanExists = variables.fw.getBeanFactory( "fw1dotenv" ).containsBean( "CustomNameSettings" );
                 expect( beanExists ).toBeTrue();
 
-                var beanType = variables.fw.getBeanFactory().getBean( "CustomNameSettings" );
+                var beanType = variables.fw.getBeanFactory( "fw1dotenv" ).getBean( "CustomNameSettings" );
                 expect( beanType ).toBeTypeOf( "struct" );
 
-                var beanVal = variables.fw.getBeanFactory().getBean( "CustomNameSettings" ).testkey;
+                var beanVal = variables.fw.getBeanFactory( "fw1dotenv" ).getBean( "CustomNameSettings" ).testkey;
                 expect( beanVal ).toBe( "test_env_value" );
             });
         });
-    }
-
-    function __config() {
-        return variables.framework;
     }
 
 }

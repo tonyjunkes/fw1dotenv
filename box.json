@@ -1,7 +1,7 @@
 {
     "name":"FW/1 Dotenv",
     "slug":"fw1dotenv",
-    "version":"1.0.0",
+    "version":"1.2.0",
     "author":"@tonyjunkes",
     "location":"tonyjunkes/fw1dotenv#develop",
     "createPackageDirectory":true,
