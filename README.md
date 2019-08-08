@@ -18,8 +18,6 @@ Installation via ForgeBox/CommandBox coming soon...
 
 ### Manual
 
-#### FW/1
-
 Include `fw1dotenv` in your FW/1 application's designated `subsystems` directory. If you do not already have a `subsystems` directory, create the directory wherever the rest of your core framework structure lives. You may refer to the [FW/1 Documentation](http://framework-one.github.io/documentation/developing-applications.html#basic-application-structure) for a rundown of a typical structure.
 
 ## Configuration
