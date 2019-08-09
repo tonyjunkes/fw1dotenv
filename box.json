@@ -4,8 +4,7 @@
     "version":"1.2.0",
     "author":"@tonyjunkes",
     "location":"tonyjunkes/fw1dotenv#develop",
-    "createPackageDirectory":true,
-    "packageDirectory":"fw1dotenv",
+    "directory":"fw1dotenv",
     "homepage":"https://github.com/tonyjunkes/fw1dotenv",
     "documentation":"https://github.com/tonyjunkes/fw1dotenv/README.md/",
     "repository":{
