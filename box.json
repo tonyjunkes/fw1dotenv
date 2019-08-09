@@ -17,7 +17,7 @@
     "description":"FW/1 Dotenv is a module that loads environment variables from a JSON or Properties file (e.g. .env) into an app accessible bean. Allowing you to store configuration in the environment separate from your code.",
     "instructions":"https://github.com/tonyjunkes/fw1dotenv/README.md",
     "changelog":"https://github.com/tonyjunkes/fw1dotenv/commits/develop",
-    "type":"modules",
+    "type":"projects",
     "keywords":[
         "fw1",
         "framework one",
